@@ -1,2 +1,4 @@
-# openmi-idl
-interface description language
+# Interface Define Language for OpenMIT
+
++ proto
++ thrift

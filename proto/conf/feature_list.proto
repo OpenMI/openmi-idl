@@ -1,0 +1,21 @@
+syntax="proto3";
+
+option cc_enable_arenas = true;
+option java_outer_classname = "FeatureListProto";
+option java_multiple_files = true;
+option java_package = "org.openmi.pb.feature";
+
+package openmi.pb.conf;
+
+message FeatureInfo {
+  string name = 1;
+  string feature_class = 2;
+  int32 col_id = 3;
+  repeated string depends = 4;
+  bool hidden = 5;
+  string args = 6;
+}
+
+message FeatureList {
+  repeated FeatureInfo features = 1;
+}

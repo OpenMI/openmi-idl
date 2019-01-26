@@ -1,0 +1,26 @@
+syntax="proto3";
+
+package openmi.pb;
+
+option cc_enable_arenas = true;
+option java_outer_classname = "NodeProto";
+option java_multiple_files = false;
+option java_package = "org.openmi.framework";
+
+//import "org.openmi.framework.attr_value.proto"
+
+message Node {
+  // node unique signature
+  string key = 1;
+  // node name and id
+  string name = 2;
+  int id = 3;
+  // op name. There may be custom paramaters in attrs
+  string op = 4;
+  // inputs 
+  repeated string inputs = 5;
+} 
+
+message NodeList {
+  repeated Node node = 1;
+}

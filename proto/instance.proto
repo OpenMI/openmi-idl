@@ -1,0 +1,64 @@
+syntax="proto3";
+
+option cc_enable_arenas = true;
+option java_outer_classname = "InstanceProto";
+option java_multiple_files = true;
+option java_package = "org.openmi.pb.instance";
+
+package openmi.pb;
+
+message Action {
+  uint32 type = 1;
+  uint32 time = 2;
+}
+
+message InstanceInfo {
+  string global_id = 1;
+  string req_id = 2;
+  string user_id = 3;
+  string item_id = 4;
+  string item_type = 5;
+  string timestamp = 6;
+  string uuid = 7;
+  repeated Action actions = 8;
+}
+
+message Label {
+  repeated float labels = 1;
+  repeated float weights = 2;
+}
+
+message Predict {
+  repeated float vals = 1;
+}
+
+message Feature {
+  repeated fixed64 fids = 1;
+  repeated float vals = 2;
+}
+
+message Instance {
+  InstanceInfo info = 1;
+  Label label = 2;
+  Predict predict = 3;
+  Feature feature = 4;
+  Feature trans_feature = 5;
+}
+
+message Instances {
+  repeated Instances instances = 1;
+}
+
+message RequestInfo {
+  string user_id = 1;
+  string req_id = 2;
+  string uuid = 3;
+  string timestamp = 4;
+  string sample_type = 5;
+}
+
+message RequestBatch {
+  Instances instances = 1;
+  Feature global_features = 2;
+  RequestInfo info = 3;
+}

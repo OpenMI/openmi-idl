@@ -1,0 +1,65 @@
+syntax="proto3";
+
+option cc_enable_arenas = true;
+option java_outer_classname = "RawFeatureProto";
+option java_multiple_files = true;
+option java_package = "org.openmit.pb.feature";
+
+package openmi.pb;
+
+message KVPair {
+  string key = 1;
+  string value = 2;
+}
+
+// for feature
+message RequestFeature {
+  repeated KVPair pairs = 1;
+}
+
+message UserFeature {
+  repeated KVPair pairs = 1;
+}
+
+message ContextFeature {
+  repeated KVPair pairs = 1;
+}
+
+message ItemFeature {
+  repeated KVPair pairs = 1;
+}
+
+message RawFeature {
+  RequestFeature        request_feature   = 1;
+  UserFeature           user_feature      = 2;
+  ContextFeature        context_feature   = 3;
+  repeated ItemFeature  item_features     = 4;
+}
+
+// for predictor using raw-feature input 
+message Embedding {
+  uint32 col_id = 1;
+  repeated uint64 values = 2;
+}
+
+message Item {
+  uint64 item_id = 1;           // docid标识
+  string item_type = 2;
+  repeated KVPair pairs = 3;    // doc维度特征
+}
+
+// 与业务相关
+message CustomizedItem {
+  uint64 item_id = 1;
+  string item_type = 2;
+  repeated float dense = 3;
+  repeated Embedding embedding = 4;
+}
+
+message RawInstances {
+  UserFeature             user_feature      = 1;
+  RequestFeature          request_feature   = 2;
+  ContextFeature          context_feature   = 3;
+  repeated Item           items             = 4;
+  repeated CustomizedItem customized_items  = 5;
+}

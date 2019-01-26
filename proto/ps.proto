@@ -1,0 +1,85 @@
+syntax="proto3";
+
+option cc_enable_arenas = true;
+option java_outer_classname = "PsProto";
+option java_multiple_files = true;
+option java_package = "org.openmit.pb.ps";
+
+package openmit.pb; 
+
+import "model.proto";
+
+enum ValType {
+  UNSET_VT  = 0;
+  WEIGHTS   = 1;
+  PARAMS    = 2;
+  GRADS     = 3;
+  VAL_TYPE_NUM = 4;
+}
+
+enum Format {
+  UNSET_FMT   = 0;
+  PROTO       = 1;
+  PBTXT       = 2;
+  FORMAT_NUM  = 3;
+}
+
+message ValList {
+  repeated float vals = 1;
+}
+
+message LenList {
+  repeated uint32 lens = 1;
+}
+
+message FilterData {
+  bytes vals = 1;
+}
+
+message ParamData {
+  repeated fixed64  fids = 1;
+  repeated uint32   cnts = 2;
+  repeated ValList  model_vals = 3;
+  repeated LenList  model_lens = 4;
+  ValType val_type = 5;
+}
+
+message ParamStat {
+  uint32 pid = 1;
+  uint64 map_data_num = 2;
+  uint64 map_ptr_data_num = 3;
+  repeated string model_part_names = 4;
+  repeated uint64 model_linear_nnzs = 5;
+  repeated uint64 model_val_sizes = 6;
+}
+
+message ShardStat {
+  uint32 shard_id = 1;  // starts from 1
+  uint64 filter_size = 2;
+  uint64 filter_max_size = 3;
+  uint64 filter_capacity = 4;
+  uint64 filter_fail_times = 5;
+  uint64 mem_pool_size = 6;
+  uint64 mem_pool_capacity = 7;
+  uint64 model_size = 8;
+  uint64 ptr_model_size = 9;
+  float beta1_pow = 10;
+  float beta2_pow = 11;
+}
+
+message DumpMeta {
+  repeated ModelDef model_defs = 1;
+  repeated ShardStat shard_stats = 2;
+  ValType val_type = 3;
+  Format format = 4;
+  bool dump_zero = 5;
+  uint64 param_batch_size = 6;
+  uint64 filter_batch_size = 7;
+  string path = 8;
+}
+
+message CkptMeta {
+  repeated string group_names = 1;
+  repeated string ckpt_paths = 2;
+  uint64 timestamp = 3;
+}

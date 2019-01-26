@@ -1,0 +1,11 @@
+# Compiler
+bin/
+build/
+lib/ 
+
+# IDL output 
+gen-pb/ 
+
+# others
+.sconsign.dblite
+.o

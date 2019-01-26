@@ -1,0 +1,24 @@
+syntax="proto3";
+
+option cc_enable_arenas = true;
+option java_outer_classname = "PsClientConfProto";
+option java_multiple_files = true;
+option java_package = "org.openmi.pb.serving";
+
+package openmi.pb.conf;
+
+message HostConf {
+  string ip = 1;
+  int32 port = 2;
+  string hostname = 3;
+}
+
+message ShardConf {
+  repeated HostConf replica_config = 1;
+}
+
+message PsClientConf {
+  int32 ps_timeout = 1;
+  int32 ps_conn_timeout = 2;
+  repeated ShardConf shard_config = 3;
+}

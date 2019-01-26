@@ -1,0 +1,19 @@
+syntax="proto3";
+
+option cc_enable_arenas = true;
+option java_outer_classname = "ExtractorConfProto";
+option java_multiple_files = false;
+option java_package = "org.openmi.pb.feature";
+
+package openmi.pb.conf;
+
+message ExtractorConf {
+  bool use_cache = 1;
+  bool debug = 2;
+  repeated string feature_schema = 3;  // schema of raw feature 
+  string feature_list_file = 4;
+  string feature_cache_file = 5;
+  string feature_norm_file = 6;
+  string label_weight_file = 7;
+  // other conf ...
+}
