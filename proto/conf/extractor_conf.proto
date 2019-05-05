@@ -3,9 +3,9 @@ syntax="proto3";
 option cc_enable_arenas = true;
 option java_outer_classname = "ExtractorConfProto";
 option java_multiple_files = false;
-option java_package = "org.openmi.pb.feature";
+option java_package = "org.openmi.proto.feature.conf";
 
-package openmi.pb.conf;
+package openmi.proto.conf;
 
 message ExtractorConf {
   bool use_cache = 1;

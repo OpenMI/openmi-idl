@@ -3,9 +3,9 @@ syntax="proto3";
 option cc_enable_arenas = true;
 option java_outer_classname = "PsClientConfProto";
 option java_multiple_files = true;
-option java_package = "org.openmi.pb.serving";
+option java_package = "org.openmi.proto.serving.conf";
 
-package openmi.pb.conf;
+package openmi.proto.conf;
 
 message HostConf {
   string ip = 1;

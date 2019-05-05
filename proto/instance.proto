@@ -3,9 +3,11 @@ syntax="proto3";
 option cc_enable_arenas = true;
 option java_outer_classname = "InstanceProto";
 option java_multiple_files = true;
-option java_package = "org.openmi.pb.instance";
+option java_package = "org.openmi.proto.instance";
 
-package openmi.pb;
+package openmi.proto;
+
+import "raw_feature.proto";
 
 message Action {
   uint32 type = 1;
@@ -29,24 +31,36 @@ message Label {
 }
 
 message Predict {
-  repeated float vals = 1;
+  repeated float values = 1;
 }
 
-message Feature {
-  repeated fixed64 fids = 1;
-  repeated float vals = 2;
+message DiscreteFeature {
+  uint64 fid = 1;
+  float weight = 2;
+  uint32 colid = 3;
+  uint32 fieldid = 4;
+  // fids raw text
+  string raw = 5;
+}
+
+// It used to feature result in openmi-feature 
+message FeatureResult {
+  repeated DiscreteFeature discrete_features = 1;
+  // defined in raw_feature.proto
+  repeated ContinuousFeature continuous_features = 2;
 }
 
 message Instance {
   InstanceInfo info = 1;
   Label label = 2;
   Predict predict = 3;
-  Feature feature = 4;
-  Feature trans_feature = 5;
+  repeated DiscreteFeature features = 4;
+  repeated DiscreteFeature trans_features = 5;
+  repeated ContinuousFeature continuous_features = 6;
 }
 
 message Instances {
-  repeated Instances instances = 1;
+  repeated Instance instances = 1;
 }
 
 message RequestInfo {
@@ -59,6 +73,6 @@ message RequestInfo {
 
 message RequestBatch {
   Instances instances = 1;
-  Feature global_features = 2;
+  repeated DiscreteFeature global_feature = 2;
   RequestInfo info = 3;
 }

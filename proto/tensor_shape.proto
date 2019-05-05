@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+option cc_enable_arenas = true;
+option java_outer_classname = "TensorShapeProtos";
+option java_multiple_files = true;
+option java_package = "org.openmi.framework";
+
+package openmi.proto;
+
+// Dimensions of a tensor 
+message TensorShapeProto {
+  // One dimension of the tensor
+  message Dim {
+    // Size of the tensor in that dimension. This value must be >= -1
+    int64 size = 1;
+    // Optional name of the tensor dimension.
+    string name = 2;
+  };
+  
+  // If dim.size() > 0. "unknown_rank" must be false.
+  repeated Dim dim = 2;
+
+  // If true, "dim.size()" must be 0
+  bool unknown_rank = 3;
+};

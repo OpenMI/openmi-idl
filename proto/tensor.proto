@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+option cc_enable_arenas = true;
+option java_outer_classname = "TensorProtos";
+option java_multiple_files = true;
+option java_package = "org.openmi.framework";
+
+package openmi.proto;
+
+import "tensor_shape.proto";
+import "types.proto";
+
+// Protocol buffer representing a tensor 
+message TensorProto {
+  DataType dtype = 1;
+  TensorShapeProto tensor_shape = 2;
+  int32 version_number = 3;
+  bytes tensor_content = 4;
+};

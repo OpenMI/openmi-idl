@@ -20,11 +20,11 @@ fi
 export LD_LIBRARY_PATH=$PROTOBUF_HOME/lib
 export DYLD_LIBRARY_PATH=$PROTOBUF_HOME/lib
 
-pb_dir=$SCRIPT_DIR/openmi/pb
+proto_dir=$SCRIPT_DIR/openmi/idl/proto
 
-cpp_out=$pb_dir
-java_out=$pb_dir/java
-python_out=$pb_dir/python
+cpp_out=$proto_dir
+java_out=$proto_dir/java
+python_out=$proto_dir/python
 
 mkdir -p $cpp_out || true
 mkdir -p $java_out || true

@@ -3,9 +3,9 @@ syntax="proto3";
 option cc_enable_arenas = true;
 option java_outer_classname = "CacheConfProto";
 option java_multiple_files = false;
-option java_package = "org.openmit.pb.feature";
+option java_package = "org.openmi.proto.feature.conf";
 
-package openmit.pb.conf;
+package openmi.proto.conf;
 
 message FeatureCacheConf {
   int32 max_cache_item = 1;

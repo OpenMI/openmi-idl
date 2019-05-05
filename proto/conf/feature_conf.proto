@@ -1,0 +1,48 @@
+syntax="proto3";
+
+option cc_enable_arenas = true;
+option java_outer_classname = "FeatureConfListProto";
+option java_multiple_files = true;
+option java_package = "org.openmi.proto.feature.conf";
+
+package openmi.proto.conf;
+
+enum FeatureDataType {
+  STRING = 0;
+  FLOAT = 1;
+  DOUBLE = 2;
+  INT32 = 3;
+  INT64 = 4;
+  BOOL = 5;
+  INVALID = 6;
+};
+
+// phase1: feature process to raw_feature
+message FeatureProcessConf {
+  string name = 1;
+  string feature_op = 2;
+  int32 col_id = 3;
+  repeated string inputs = 4;
+  bool hidden = 5;
+  string args = 6;
+  FeatureDataType data_type = 7;
+}
+
+message FeatureProcessConfList {
+  repeated FeatureProcessConf features = 1;
+}
+
+// phase2: feature extract to instance
+message FeatureExtractConf {
+  string name = 1;
+  string feature_op = 2;
+  int32 col_id = 3;
+  repeated string inputs = 4;
+  bool hidden = 5;
+  string args = 6;
+  FeatureDataType data_type = 7;
+}
+
+message FeatureExtractConfList {
+  repeated FeatureExtractConf features = 1;
+}

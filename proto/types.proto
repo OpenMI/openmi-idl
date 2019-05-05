@@ -1,11 +1,11 @@
 syntax = "proto3";
 
 option cc_enable_arenas = true;
-option java_outer_classname = "TypesProto";
+option java_outer_classname = "DataTypeProtos";
 option java_multiple_files = true;
-option java_package = "org.openmi.pb";
+option java_package = "org.openmi.framework";
 
-package openmi.pb;
+package openmi.proto;
 
 enum DataType {
   DT_INVALID = 0;

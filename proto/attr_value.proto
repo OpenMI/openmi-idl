@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+option cc_enable_arenas = true;
+option java_outer_classname = "AttrValueProtos";
+option java_multiple_files = true;
+option java_package = "org.openmi.framework";
+
+package openmi.proto;
+
+import "tensor.proto";
+import "tensor_shape.proto";
+import "types.proto";
+
+message AttrValue {
+  oneof value {
+    bytes s = 2;      // "string"
+    int64 i = 3;      // "int"
+    float f = 4;      // "float"
+    bool b = 5;       // "bool"
+    DataType type = 6;            // "type"
+    TensorShapeProto shape = 7;   // "shape"
+    TensorProto tensor = 8;       // "tensor"
+  }
+}

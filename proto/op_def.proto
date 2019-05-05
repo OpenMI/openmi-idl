@@ -1,0 +1,65 @@
+syntax="proto3";
+
+option cc_enable_arenas = true;
+option java_outer_classname = "OpDefProtos";
+option java_multiple_files = true;
+option java_package = "org.openmi.framework";
+
+package openmi.proto;
+
+import "attr_value.proto";
+import "types.proto";
+
+// Define an operation. A NodeDef in a GraphDef specifies an Op by 
+// using the "op" field which should match the name of a OpDef. 
+message OpDef {
+  string name = 1;
+  // For describing inputs and outputs 
+  message ArgDef {
+    // Name for the input/output 
+    string name = 1;
+    // Human readable description.
+    string description = 2;
+    
+    DataType type = 3;
+    string type_attr = 4;
+    string number_attr = 5;
+    string type_list_attr = 6;
+    bool is_ref = 16;
+  };
+
+  // Description of the input(s)
+  repeated ArgDef input_arg = 2;
+
+  // Description of the output(s)
+  repeated ArgDef output_arg = 3;
+
+  // Description of the graph construction time configuration of this Op. 
+  // That is to say, this describes the attr fields that will be specified
+  // in the NodeDef. 
+  message AttrDef {
+    string name = 1; 
+    // One of the type names from attr_value.proto ("string", "int", etc.)
+    string type = 2;
+    // A reasonable default for this attribute if the user does not supply a value. 
+    AttrValue default_value = 3;
+    // Human readable description.
+    string description = 4;
+  };
+
+  repeated AttrDef attr = 4;
+
+  // True if the operation is commutative ("op(a,b) == op(b,a)" for all inputs)
+  bool is_commutative = 18; 
+
+  // If is_aggregate is true, then this operation accepts N >= 2 inputs and 
+  // produces 1 output all of the same type. 
+  bool is_aggregate = 16;     // for things like add 
+
+  bool is_stateful = 17;
+}; 
+
+// A collection of OpDefs 
+message OpList {
+  repeated OpDef op = 1;
+};

@@ -1,0 +1,20 @@
+syntax="proto3";
+
+option cc_enable_arenas = true;
+option java_outer_classname = "GraphProto";
+option java_multiple_files = true;
+option java_package = "org.openmi.framework";
+
+package openmi.proto;
+
+import "node_def.proto";
+
+// Represents the graph of operations 
+message GraphDef {
+  // Name of graph. Unique with between graph 
+  string name = 1;
+  // A collection of node(s)
+  repeated NodeDef node = 2;
+  // Version
+  int32 version = 3; 
+}

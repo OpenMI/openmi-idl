@@ -3,9 +3,9 @@ syntax="proto3";
 option cc_enable_arenas = true;
 option java_outer_classname = "RawFeatureProto";
 option java_multiple_files = true;
-option java_package = "org.openmit.pb.feature";
+option java_package = "org.openmi.proto.feature";
 
-package openmi.pb;
+package openmi.proto;
 
 message KVPair {
   string key = 1;
@@ -25,8 +25,14 @@ message ContextFeature {
   repeated KVPair pairs = 1;
 }
 
+// such as creative features
+message SubItemFeature {
+  repeated KVPair pairs = 1;
+}
+
 message ItemFeature {
   repeated KVPair pairs = 1;
+  repeated SubItemFeature sub_item_pairs = 2;
 }
 
 message RawFeature {
@@ -39,21 +45,26 @@ message RawFeature {
 // for predictor using raw-feature input 
 message Embedding {
   uint32 col_id = 1;
-  repeated uint64 values = 2;
+  repeated float values = 2;
+}
+
+message ContinuousFeature {
+  uint32 colid = 1;
+  repeated float values = 2;
 }
 
 message Item {
-  uint64 item_id = 1;           // docid标识
+  uint64 item_id = 1;
   string item_type = 2;
-  repeated KVPair pairs = 3;    // doc维度特征
+  repeated KVPair pairs = 3;
+  repeated SubItemFeature sub_item_pairs = 4;
 }
 
-// 与业务相关
 message CustomizedItem {
   uint64 item_id = 1;
   string item_type = 2;
-  repeated float dense = 3;
-  repeated Embedding embedding = 4;
+  repeated ContinuousFeature dense = 3;
+  repeated ContinuousFeature embedding = 4;
 }
 
 message RawInstances {

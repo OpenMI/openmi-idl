@@ -1,0 +1,25 @@
+syntax="proto3";
+
+option cc_enable_arenas = true;
+option java_outer_classname = "NodeProto";
+option java_multiple_files = true;
+option java_package = "org.openmi.framework";
+
+package openmi.proto;
+
+import "attr_value.proto";
+
+message NodeDef {
+  // The name given to this operator. Used for nameing inputs, logging, visualization, etc. 
+  // Notice: Unique with a single GraphDef 
+  string name = 1;
+  // The operation name. 
+  string op = 2;
+  repeated string input = 3;
+  // Device name 
+  string device = 4;
+
+  // Operation-specific graph construction time configuration. 
+  // Note that this should include all attrs defined in the corresponding OpDef. 
+  map<string, AttrValue> attr = 5;
+}

@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 2.4)
 
-project(openmit-idl)
+project(openmi-idl)
 
 set(CMAKE_VERBOSE_MAKEFILE on)
 
@@ -30,12 +30,12 @@ set(link_libs
   libprotobuf.a
 )
 
-aux_source_directory(openmi/pb srcs_pbcpp)
+aux_source_directory(openmi/idl/proto srcs_pbcpp)
 
 set(srcs "")
 list(APPEND srcs ${srcs_pbcpp})
 
-set(libname openmit_idl)
+set(libname openmi_idl)
 
 add_library(${libname} SHARED ${srcs})
 target_link_libraries(${libname} ${link_libs})

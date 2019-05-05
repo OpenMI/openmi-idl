@@ -16,7 +16,7 @@ while getopts "c:" opt; do
 done
 
 # Compile IDL
-sh $SCRIPT_DIR/script/compile-pb.sh -c $deps_base_path
+sh $SCRIPT_DIR/script/compile-proto.sh -c $deps_base_path
 
 export PROTOBUF_HOME=$deps_base_path
 
