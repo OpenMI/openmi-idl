@@ -1,4 +1,4 @@
-# Interface Define Language for OpenMIT
+# OpenMI - Interface Define Language
 
 + proto
 + thrift
