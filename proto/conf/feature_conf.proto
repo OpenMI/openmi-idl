@@ -17,7 +17,7 @@ enum FeatureDataType {
   INVALID = 6;
 };
 
-// phase1: feature process to raw_feature
+// drop in the future
 message FeatureProcessConf {
   string name = 1;
   string feature_op = 2;
@@ -32,7 +32,7 @@ message FeatureProcessConfList {
   repeated FeatureProcessConf features = 1;
 }
 
-// phase2: feature extract to instance
+// feature extract to instance
 message FeatureExtractConf {
   string name = 1;
   string feature_op = 2;
@@ -45,4 +45,24 @@ message FeatureExtractConf {
 
 message FeatureExtractConfList {
   repeated FeatureExtractConf features = 1;
+}
+
+// feature mapping config 
+message BucketConf {
+  float min = 1;
+  float max = 2;
+  int32 bucket_size = 3;
+}
+
+message FeatureMapping {
+  string name = 1;
+  int32 col_id = 2;
+  bool use_bucket = 3;
+  BucketConf bucket = 4;
+  string custom_bucket = 5;
+  string custom_bucket_delimiter = 6;
+}
+
+message FeatureMappingList {
+  repeated FeatureMapping mapping = 1;
 }

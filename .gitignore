@@ -5,6 +5,7 @@ lib/
 
 # IDL output 
 gen-pb/ 
+openmi/idl/
 
 # others
 .sconsign.dblite

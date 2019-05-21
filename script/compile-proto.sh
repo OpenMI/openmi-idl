@@ -46,8 +46,12 @@ function compile_proto_recursive() {
     fi
     
     if [[ "${dir_or_file:0-6}" == "$postfix" ]]; then 
-      $protoc -I=$1 --cpp_out=$cpp_out --java_out=$java_out --python_out=$python_out $dir_or_file
-    fi
+      $protoc -I=$1 --cpp_out=$cpp_out --java_out=$java_out --python_out=$python_out $dir_or_file 
+      if [[ $? -ne 0 ]]; then 
+        echo "compile proto failed. proto file: ${dir_or_file}"
+        exit 1
+      fi
+    fi 
   done
 }
 
