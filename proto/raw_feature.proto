@@ -24,7 +24,7 @@ message StatEntry {
 }
 
 message StatEntryList {
-  repeated StatEntry stat_entrys = 1;
+  repeated StatEntry stat_entry = 1;
 }
 
 /* for raw feature */
@@ -49,7 +49,7 @@ message ItemFeature {
   repeated KVPair pairs = 1;
   repeated SubItemFeature sub_item_pairs = 2;
   // used for offline stat feature (unique stat feature)
-  StatEntryList stat_entry = 3;
+  StatEntryList stat_entrys = 3;
 }
 
 
@@ -59,7 +59,7 @@ message RawFeature {
   ContextFeature        context_feature   = 3;
   repeated ItemFeature  item_features     = 4;
   // used for offline stat feature (shared stat feature)
-  StatEntryList shared_stat_entry = 5;
+  StatEntryList shared_stat_entrys = 5;
 }
 
 /* for predictor using raw-feature input */
