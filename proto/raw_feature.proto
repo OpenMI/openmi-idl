@@ -12,7 +12,22 @@ message KVPair {
   string value = 2;
 }
 
-// for feature
+// for stat feature basic entry based label data
+message StatEntry {
+  uint32 colid = 1;
+  uint64 feature_sign = 2;
+  string date_arg = 3;   // format: 20170908
+  int32 days = 4;        // stat days 
+  uint32 positive_count = 5;
+  uint64 negative_count = 6;
+  string raw = 7;
+}
+
+message StatEntryList {
+  repeated StatEntry stat_entrys = 1;
+}
+
+/* for raw feature */
 message RequestFeature {
   repeated KVPair pairs = 1;
 }
@@ -33,16 +48,21 @@ message SubItemFeature {
 message ItemFeature {
   repeated KVPair pairs = 1;
   repeated SubItemFeature sub_item_pairs = 2;
+  // used for offline stat feature (unique stat feature)
+  StatEntryList stat_entry = 3;
 }
+
 
 message RawFeature {
   RequestFeature        request_feature   = 1;
   UserFeature           user_feature      = 2;
   ContextFeature        context_feature   = 3;
   repeated ItemFeature  item_features     = 4;
+  // used for offline stat feature (shared stat feature)
+  StatEntryList shared_stat_entry = 5;
 }
 
-// for predictor using raw-feature input 
+/* for predictor using raw-feature input */
 message Embedding {
   uint32 col_id = 1;
   repeated float values = 2;

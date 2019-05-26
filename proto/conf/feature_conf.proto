@@ -41,9 +41,12 @@ message FeatureExtractConf {
   bool hidden = 5;
   string args = 6;
   FeatureDataType data_type = 7;
+  map<string, string> params = 8;
+  bool allow_same_name = 9;
 }
 
 message FeatureExtractConfList {
+  // conf used for feature extract.
   repeated FeatureExtractConf features = 1;
 }
 
@@ -66,3 +69,4 @@ message FeatureMapping {
 message FeatureMappingList {
   repeated FeatureMapping mapping = 1;
 }
+

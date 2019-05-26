@@ -12,7 +12,7 @@ message ExtractorConf {
   bool debug = 2;
   repeated string feature_schema = 3;  // schema of raw feature 
   string feature_list_file = 4;
-  string feature_norm_file = 5;
+  string feature_mapping_file = 5;
   string feature_cache_file = 6;
   string label_weight_file = 7;
   // other conf ...
