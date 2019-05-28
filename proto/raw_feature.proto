@@ -15,16 +15,22 @@ message KVPair {
 // for stat feature basic entry based label data
 message StatEntry {
   uint32 colid = 1;
-  uint64 feature_sign = 2;
-  string date_arg = 3;   // format: 20170908
-  int32 days = 4;        // stat days 
-  uint32 positive_count = 5;
-  uint64 negative_count = 6;
-  string raw = 7;
+  int32 period = 2;   // stat peroid, such as days
+  int32 positive_count = 3;
+  int32 negative_count = 4;
+  map<string, string> extra = 5;
 }
 
-message StatEntryList {
-  repeated StatEntry stat_entry = 1;
+// support multiply days stat
+message StatFeature {
+  uint64 feature_sign = 1;
+  string raw = 2;
+  string last_date = 3;   // format: 20170908
+  map<int32, StatEntry> stats = 4;
+}
+
+message StatFeatureList {
+  repeated StatFeature stat_feature = 1;
 }
 
 /* for raw feature */
@@ -46,10 +52,12 @@ message SubItemFeature {
 }
 
 message ItemFeature {
-  repeated KVPair pairs = 1;
-  repeated SubItemFeature sub_item_pairs = 2;
+  // support multi-label scene
+  repeated float label = 1;
+  repeated KVPair pairs = 2;
+  repeated SubItemFeature sub_item_pairs = 3;
   // used for offline stat feature (unique stat feature)
-  StatEntryList stat_entrys = 3;
+  StatFeatureList stat_features = 4;
 }
 
 
@@ -59,7 +67,7 @@ message RawFeature {
   ContextFeature        context_feature   = 3;
   repeated ItemFeature  item_features     = 4;
   // used for offline stat feature (shared stat feature)
-  StatEntryList shared_stat_entrys = 5;
+  StatFeatureList shared_stat_features = 5;
 }
 
 /* for predictor using raw-feature input */
