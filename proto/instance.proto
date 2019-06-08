@@ -7,60 +7,12 @@ option java_package = "org.openmi.proto.instance";
 
 package openmi.proto;
 
-import "raw_feature.proto";
-
-message Action {
-  uint32 type = 1;
-  uint32 time = 2;
-}
-
-message InstanceInfo {
-  string global_id = 1;
-  string req_id = 2;
-  string user_id = 3;
-  string item_id = 4;
-  string item_type = 5;
-  string timestamp = 6;
-  string uuid = 7;
-  repeated Action actions = 8;
-}
-
-message Label {
-  repeated float labels = 1;
-  repeated float weights = 2;
-}
-
-message Predict {
-  repeated float values = 1;
-}
-
-message DiscreteFeature {
-  uint64 fid = 1;
-  float weight = 2;
-  uint32 colid = 3;
-  uint32 fieldid = 4;
-  // fids raw text
-  string raw = 5;
-}
-
-// It used to feature result in openmi-feature 
-message FeatureResult {
-  repeated DiscreteFeature discrete_features = 1;
-  // defined in raw_feature.proto
-  repeated ContinuousFeature continuous_features = 2;
-}
-
-message Instance {
-  InstanceInfo info = 1;
-  Label label = 2;
-  Predict predict = 3;
-  repeated DiscreteFeature features = 4;
-  repeated DiscreteFeature trans_features = 5;
-  repeated ContinuousFeature continuous_features = 6;
-}
+import "feature.proto";
 
 message Instances {
   repeated Instance instances = 1;
+  // middle data: shared stat feature 
+  StatFeatureList shared_stat_feature = 2;
 }
 
 message RequestInfo {

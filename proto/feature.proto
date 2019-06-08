@@ -1,24 +1,21 @@
 syntax="proto3";
 
 option cc_enable_arenas = true;
-option java_outer_classname = "RawFeatureProto";
+option java_outer_classname = "FeatureProto";
 option java_multiple_files = true;
 option java_package = "org.openmi.proto.feature";
 
 package openmi.proto;
 
-message KVPair {
-  string key = 1;
-  string value = 2;
-}
-
+/* Stat Feature */
 // for stat feature basic entry based label data
 message StatEntry {
-  uint32 colid = 1;
-  int32 period = 2;   // stat peroid, such as days
-  int32 positive_count = 3;
-  int32 negative_count = 4;
-  map<string, string> extra = 5;
+  uint64 feature_sign = 1;
+  uint32 colid = 2;
+  int32 period = 3;   // stat peroid, such as days
+  int32 positive_count = 4;
+  int32 negative_count = 5;
+  map<string, string> extra = 6;
 }
 
 // support multiply days stat
@@ -26,14 +23,64 @@ message StatFeature {
   uint64 feature_sign = 1;
   string raw = 2;
   string last_date = 3;   // format: 20170908
-  map<int32, StatEntry> stats = 4;
+  map<int32, StatEntry> stats = 4;  // <colid, StatEntry>
 }
 
 message StatFeatureList {
   repeated StatFeature stat_feature = 1;
 }
 
-/* for raw feature */
+/* Feature Type Defination */
+message DiscreteFeature {
+  uint64 fid = 1;
+  float weight = 2;
+  uint32 colid = 3;
+  uint32 fieldid = 4;
+  string raw = 5;
+}
+
+message ContinuousFeature {
+  uint32 colid = 1;
+  repeated float values = 2;
+}
+
+/* Instance Defination */
+message InstanceInfo {
+  string global_id = 1;
+  string req_id = 2;
+  string user_id = 3;
+  string item_id = 4;
+  string item_type = 5;
+  string timestamp = 6;
+  string uuid = 7;
+}
+
+message Label {
+  repeated float labels = 1;
+  repeated float weights = 2;
+}
+
+message Predict {
+  repeated float values = 1;
+}
+
+message Instance {
+  InstanceInfo info = 1;
+  Label label = 2;
+  Predict predict = 3;
+  repeated DiscreteFeature features = 4;
+  repeated DiscreteFeature trans_features = 5;
+  repeated ContinuousFeature continuous_features = 6;
+  // middle data: unique stat feature 
+  StatFeatureList unique_stat_feature = 7;
+}
+
+/* Raw Feature */
+message KVPair {
+  string key = 1;
+  string value = 2;
+}
+
 message RequestFeature {
   repeated KVPair pairs = 1;
 }
@@ -56,29 +103,23 @@ message ItemFeature {
   repeated float label = 1;
   repeated KVPair pairs = 2;
   repeated SubItemFeature sub_item_pairs = 3;
-  // used for offline stat feature (unique stat feature)
-  StatFeatureList stat_features = 4;
+  // extracted feature instance
+  Instance instance = 4;
 }
-
 
 message RawFeature {
   RequestFeature        request_feature   = 1;
   UserFeature           user_feature      = 2;
   ContextFeature        context_feature   = 3;
   repeated ItemFeature  item_features     = 4;
-  // used for offline stat feature (shared stat feature)
-  StatFeatureList shared_stat_features = 5;
 }
 
-/* for predictor using raw-feature input */
-message Embedding {
-  uint32 col_id = 1;
-  repeated float values = 2;
-}
-
-message ContinuousFeature {
-  uint32 colid = 1;
-  repeated float values = 2;
+// It used to feature result in openmi-feature 
+message FeatureResult {
+  repeated DiscreteFeature discrete_features = 1;
+  // defined in message RawFeature
+  repeated ContinuousFeature continuous_features = 2;
+  repeated StatEntry stat_entry = 3;
 }
 
 message Item {

@@ -8,16 +8,19 @@ option java_package = "org.openmi.proto.feature.conf";
 package openmi.proto.conf;
 
 enum FeatureDataType {
-  STRING = 0;
-  FLOAT = 1;
-  DOUBLE = 2;
-  INT32 = 3;
-  INT64 = 4;
-  BOOL = 5;
-  INVALID = 6;
+  INVALID = 0;
+  STRING = 1;
+  FLOAT = 2;
+  DOUBLE = 3;
+  INT32 = 4;
+  INT64 = 5;
+  BOOL = 6;
+  STAT = 7;
+  COMBINE = 8;
 };
 
 // drop in the future
+/**
 message FeatureProcessConf {
   string name = 1;
   string feature_op = 2;
@@ -31,6 +34,7 @@ message FeatureProcessConf {
 message FeatureProcessConfList {
   repeated FeatureProcessConf features = 1;
 }
+*/
 
 // feature extract to instance
 message FeatureExtractConf {
@@ -43,6 +47,8 @@ message FeatureExtractConf {
   FeatureDataType data_type = 7;
   map<string, string> params = 8;
   bool allow_same_name = 9;
+  bool use_bucket = 10;
+  bool sign_without_col = 11;
 }
 
 message FeatureExtractConfList {
@@ -57,16 +63,17 @@ message BucketConf {
   int32 bucket_size = 3;
 }
 
-message FeatureMapping {
+message FeatureBucketing {
   string name = 1;
   int32 col_id = 2;
   bool use_bucket = 3;
   BucketConf bucket = 4;
   string custom_bucket = 5;
   string custom_bucket_delimiter = 6;
+  string description = 7;
 }
 
-message FeatureMappingList {
-  repeated FeatureMapping mapping = 1;
+message FeatureBucketingList {
+  repeated FeatureBucketing bucketing = 1;
 }
 

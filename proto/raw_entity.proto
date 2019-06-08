@@ -1,0 +1,53 @@
+syntax="proto3";
+
+option cc_enable_arenas = true;
+option java_outer_classname = "RawEntityProto";
+option java_multiple_files = true;
+option java_package = "org.openmi.proto.entity";
+
+package openmi.proto;
+
+message Exposure {
+  string request_id = 1;
+  string session_id = 2;
+  string user_id = 3;
+  string context_id = 4;
+  ItemKey item_key = 5;
+  map<string, string> data = 6;
+  bytes extra_data = 7;
+}
+
+message ItemKey {
+  string item_id = 1;
+  string second_key = 2;
+}
+
+message ItemEntity {
+  ItemKey item_key = 1;
+  map<string, string> data = 2;
+  bytes extra_data = 3;
+}
+
+message UserEntity {
+  string user_id = 1;
+  string device_id = 2;
+  string user_type = 3;
+  map<string, string> data = 4;
+  bytes extra_data = 5;
+}
+
+message RequestContextEntity {
+  string request_id = 1;
+  string context_id = 2;
+  map<string, string> data = 3;
+  bytes extra_data = 4;
+}
+
+message MergedData {
+  // unique id for records
+  bytes id = 1;
+  Exposure exposure = 2;
+  RequestContextEntity req_ctx_entity = 3;
+  UserEntity user_entity = 4;
+  ItemEntity item_entity = 5;
+}
