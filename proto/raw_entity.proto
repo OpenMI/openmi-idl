@@ -13,8 +13,9 @@ message Exposure {
   string user_id = 3;
   string context_id = 4;
   ItemKey item_key = 5;
-  map<string, string> data = 6;
-  bytes extra_data = 7;
+  repeated float label = 6;
+  map<string, string> data = 7;
+  bytes extra_data = 8;
 }
 
 message ItemKey {
