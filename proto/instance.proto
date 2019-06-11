@@ -28,3 +28,8 @@ message RequestBatch {
   repeated DiscreteFeature global_feature = 2;
   RequestInfo info = 3;
 }
+
+message RequestBatchJoinData {
+  RequestBatch batch = 1;
+  map<string, StatFeature> stat_feature = 2;
+}

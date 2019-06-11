@@ -19,36 +19,18 @@ enum FeatureDataType {
   COMBINE = 8;
 };
 
-// drop in the future
-/**
-message FeatureProcessConf {
-  string name = 1;
-  string feature_op = 2;
-  int32 col_id = 3;
-  repeated string inputs = 4;
-  bool hidden = 5;
-  string args = 6;
-  FeatureDataType data_type = 7;
-}
-
-message FeatureProcessConfList {
-  repeated FeatureProcessConf features = 1;
-}
-*/
-
 // feature extract to instance
 message FeatureExtractConf {
   string name = 1;
   string feature_op = 2;
   int32 col_id = 3;
   repeated string inputs = 4;
-  bool hidden = 5;
-  string args = 6;
-  FeatureDataType data_type = 7;
-  map<string, string> params = 8;
-  bool allow_same_name = 9;
+  string output = 5;
+  bool hidden = 6;
+  string args = 7;
+  FeatureDataType data_type = 8;
+  map<string, string> params = 9;
   bool use_bucket = 10;
-  bool sign_without_col = 11;
 }
 
 message FeatureExtractConfList {

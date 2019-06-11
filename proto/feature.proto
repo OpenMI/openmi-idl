@@ -11,11 +11,12 @@ package openmi.proto;
 // for stat feature basic entry based label data
 message StatEntry {
   uint64 feature_sign = 1;
-  uint32 colid = 2;
-  int32 period = 3;   // stat peroid, such as days
-  int32 positive_count = 4;
-  int32 negative_count = 5;
-  map<string, string> extra = 6;
+  string feature_name = 2;
+  uint32 colid = 3;
+  int32 period = 4;   // stat peroid, such as days
+  int32 positive_count = 5;
+  int32 negative_count = 6;
+  map<string, string> extra = 7;
 }
 
 // support multiply days stat
