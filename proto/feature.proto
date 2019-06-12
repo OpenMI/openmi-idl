@@ -69,9 +69,9 @@ message Instance {
   InstanceInfo info = 1;
   Label label = 2;
   Predict predict = 3;
-  repeated DiscreteFeature features = 4;
-  repeated DiscreteFeature trans_features = 5;
-  repeated ContinuousFeature continuous_features = 6;
+  repeated DiscreteFeature feature = 4;
+  repeated DiscreteFeature trans_feature = 5;
+  repeated ContinuousFeature continuous_feature = 6;
   // middle data: unique stat feature 
   StatFeatureList unique_stat_feature = 7;
 }

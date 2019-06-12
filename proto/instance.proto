@@ -10,7 +10,7 @@ package openmi.proto;
 import "feature.proto";
 
 message Instances {
-  repeated Instance instances = 1;
+  repeated Instance instance = 1;
   // middle data: shared stat feature 
   StatFeatureList shared_stat_feature = 2;
 }
