@@ -13,7 +13,7 @@ message StatEntry {
   uint64 feature_sign = 1;
   string feature_name = 2;
   uint32 colid = 3;
-  int32 period = 4;   // stat peroid, such as days
+  int32 days = 4;   // stat peroid, such as days
   int32 positive_count = 5;
   int32 negative_count = 6;
   map<string, string> extra = 7;
@@ -23,7 +23,7 @@ message StatEntry {
 message StatFeature {
   uint64 feature_sign = 1;
   string raw = 2;
-  string last_date = 3;   // format: 20170908
+  string last_date = 3;   // format: 20180908
   map<int32, StatEntry> stats = 4;  // <colid, StatEntry>
 }
 
