@@ -7,6 +7,13 @@ option java_package = "org.openmi.proto.entity";
 
 package openmi.proto;
 
+enum RecordType {
+  UNKNOWN = 0;
+  IMPRESSION = 1;
+  CLICK = 2;
+  ORDER = 3;
+}
+
 message Exposure {
   string request_id = 1;
   string session_id = 2;
@@ -14,8 +21,9 @@ message Exposure {
   string context_id = 4;
   ItemKey item_key = 5;
   repeated float label = 6;
-  map<string, string> data = 7;
-  bytes extra_data = 8;
+  RecordType record_type = 7;
+  map<string, string> data = 8;
+  bytes extra_data = 9;
 }
 
 message ItemKey {

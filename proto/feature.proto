@@ -8,18 +8,25 @@ option java_package = "org.openmi.proto.feature";
 package openmi.proto;
 
 /* Stat Feature */
-// for stat feature basic entry based label data
+// stat metrics
+message StatMetrics {
+  int32 imp = 1;
+  int32 clk = 2;
+  int32 ord = 3;
+}
+// stat feature basic entry
 message StatEntry {
   uint64 feature_sign = 1;
   string feature_name = 2;
   uint32 colid = 3;
-  int32 days = 4;   // stat peroid, such as days
-  int32 positive_count = 5;
-  int32 negative_count = 6;
-  map<string, string> extra = 7;
+  int32 days = 4;   // history period. 
+  StatMetrics stat_metrics = 5;
+  int32 positive_count = 6;
+  int32 negative_count = 7;
+  map<string, string> extra = 8;
 }
 
-// support multiply days stat
+// stat feature. support multiply days stat
 message StatFeature {
   uint64 feature_sign = 1;
   string raw = 2;
@@ -74,6 +81,7 @@ message Instance {
   repeated ContinuousFeature continuous_feature = 6;
   // middle data: unique stat feature 
   StatFeatureList unique_stat_feature = 7;
+  StatMetrics stat_metrics = 8;
 }
 
 /* Raw Feature */
@@ -106,6 +114,7 @@ message ItemFeature {
   repeated SubItemFeature sub_item_pairs = 3;
   // extracted feature instance
   Instance instance = 4;
+  StatMetrics stat_metrics = 5;
 }
 
 message RawFeature {
