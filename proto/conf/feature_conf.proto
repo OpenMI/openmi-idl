@@ -19,6 +19,18 @@ enum FeatureDataType {
   COMBINE = 8;
 };
 
+enum MathMethod {
+  NOTHING = 0;
+  ROUND = 1;
+  LOG = 2;
+  LOG10 = 3;
+  EXP = 4;
+  EXP2 = 5;
+  POW = 6;
+  SQRT = 7;
+  FMOD = 8;
+};
+
 // feature extract to instance
 message FeatureExtractConf {
   string name = 1;
@@ -30,7 +42,9 @@ message FeatureExtractConf {
   string args = 7;
   FeatureDataType data_type = 8;
   map<string, string> params = 9;
-  bool use_bucket = 10;
+  MathMethod math_method = 10;
+  bool use_bucket = 11;
+  string description = 12;
 }
 
 message FeatureExtractConfList {
@@ -38,7 +52,7 @@ message FeatureExtractConfList {
   repeated FeatureExtractConf features = 1;
 }
 
-// feature bucketing config 
+// feature bucketing config  
 message BucketConf {
   float min = 1;
   float max = 2;
@@ -52,7 +66,8 @@ message FeatureBucketing {
   BucketConf bucket = 4;
   string custom_bucket = 5;
   string custom_bucket_delimiter = 6;
-  string description = 7;
+  MathMethod math_method = 7;
+  string description = 8;
 }
 
 message FeatureBucketingList {
