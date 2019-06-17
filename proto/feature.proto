@@ -79,9 +79,9 @@ message Instance {
   repeated DiscreteFeature feature = 4;
   repeated DiscreteFeature trans_feature = 5;
   repeated ContinuousFeature continuous_feature = 6;
-  // middle data: unique stat feature 
   StatFeatureList unique_stat_feature = 7;
   StatMetrics stat_metrics = 8;
+  map<string, string> extra = 9;
 }
 
 /* Raw Feature */
@@ -107,7 +107,7 @@ message SubItemFeature {
   repeated KVPair pairs = 1;
 }
 
-message ItemFeature {
+message ItemFeature { 
   // support multi-label scene
   repeated float label = 1;
   repeated KVPair pairs = 2;
