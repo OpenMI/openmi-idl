@@ -21,9 +21,8 @@ message StatEntry {
   uint32 colid = 3;
   int32 days = 4;   // history period. 
   StatMetrics stat_metrics = 5;
-  int32 positive_count = 6;
-  int32 negative_count = 7;
-  map<string, string> extra = 8;
+  string raw = 6;
+  map<string, string> extra = 7;
 }
 
 // stat feature. support multiply days stat
