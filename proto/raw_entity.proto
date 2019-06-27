@@ -21,24 +21,11 @@ message Exposure {
   string uuid = 4;
   string context_id = 5;
   ItemKey item_key = 6;
-  PoiKey poi_key = 7;
-  repeated float label = 8;
-  RecordType record_type = 9;
-  map<string, string> data = 10;
-  bytes extra_data = 11;
+  repeated float label = 7;
+  RecordType record_type = 8;
+  map<string, string> data = 9;
+  bytes extra_data = 10;
 }
-
-message PoiKey {
-  string poi_id = 1;
-  string second_key = 2;
-}
-
-message PoiEntity {
-  PoiKey poi_key = 1;
-  map<string, string> data = 2;
-  bytes extra_data = 3;
-}
-
 message ItemKey {
   string item_id = 1;
   string second_key = 2;
@@ -72,5 +59,4 @@ message MergedData {
   RequestContextEntity req_ctx_entity = 3;
   UserEntity user_entity = 4;
   ItemEntity item_entity = 5;
-  PoiEntity poi_entity = 6;
 }
