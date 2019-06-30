@@ -26,12 +26,32 @@ message StatEntry {
   map<string, string> extra = 7;
 }
 
+message Entry {
+  uint64 timestamp = 1;
+  string s = 2;
+  double d = 3;
+  float f = 4;
+  int32 i = 5;
+  int64 l = 6;
+  repeated string ss = 7;
+}
+
+message EntryList {
+  uint64 feature_sign = 1;
+  uint32 colid = 2;
+  int32 days = 3;
+  string raw = 4;
+  string tag = 5;
+  repeated Entry entry = 6;
+}
+
 // stat feature. support multiply days stat
 message StatFeature {
   uint64 feature_sign = 1;
   string raw = 2;
   string last_date = 3;   // format: 20180908
   map<uint32, StatEntry> stats = 4;  // <colid, StatEntry>
+  map<string, EntryList> entrys = 5;  // <tag, collected data list that group by feature_sign> 
 }
 
 message StatFeatureList {
@@ -129,7 +149,10 @@ message FeatureResult {
   repeated DiscreteFeature discrete_features = 1;
   // defined in message RawFeature
   repeated ContinuousFeature continuous_features = 2;
+  // used to stat feature
   repeated StatEntry stat_entry = 3;
+  // used to data collect by key
+  repeated EntryList entry_list = 4;
 }
 
 message Item {
