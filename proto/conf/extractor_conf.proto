@@ -8,12 +8,8 @@ option java_package = "org.openmi.proto.feature.conf";
 package openmi.proto.conf;
 
 message ExtractorConf {
-  bool use_cache = 1;
-  bool debug = 2;
-  repeated string feature_schema = 3;  // schema of raw feature 
-  string feature_list_file = 4;
-  string feature_bucketing_file = 5;
-  string feature_cache_file = 6;
-  string label_weight_file = 7;
+  bool is_debug = 1;
+  string feature_list_file = 2;
+  string feature_bucketing_file = 3;
   // other conf ...
 }

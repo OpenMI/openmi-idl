@@ -17,13 +17,8 @@ message StatMetrics {
 }
 // stat feature basic entry
 message StatEntry {
-  uint64 feature_sign = 1;
-  string feature_name = 2;
-  uint32 colid = 3;
-  int32 days = 4;   // history period. 
-  StatMetrics stat_metrics = 5;
-  string raw = 6;
-  map<string, string> extra = 7;
+  int32 days =  1;
+  StatMetrics stat_metrics = 2;
 }
 
 message Entry {
@@ -37,9 +32,9 @@ message Entry {
 }
 
 message EntryList {
-  uint64 feature_sign = 1;
-  uint32 colid = 2;
-  int32 days = 3;
+  int32 days = 1;
+  uint64 feature_sign = 2;
+  uint32 colid = 3;
   string raw = 4;
   string tag = 5;
   repeated Entry entry = 6;
@@ -48,10 +43,12 @@ message EntryList {
 // stat feature. support multiply days stat
 message StatFeature {
   uint64 feature_sign = 1;
-  string raw = 2;
-  string last_date = 3;   // format: 20180908
-  map<uint32, StatEntry> stats = 4;  // <colid, StatEntry>
-  map<string, EntryList> entrys = 5;  // <tag, collected data list that group by feature_sign> 
+  uint64 feature_name = 2;
+  int32 colid = 3;
+  string raw = 4;
+  string last_date = 5;   // format: yyyymmdd
+  repeated StatEntry stat_entry = 6;
+  repeated EntryList entry_list = 7;
 }
 
 message StatFeatureList {
@@ -150,7 +147,7 @@ message FeatureResult {
   // defined in message RawFeature
   repeated ContinuousFeature continuous_features = 2;
   // used to stat feature
-  repeated StatEntry stat_entry = 3;
+  repeated StatFeature stat_feature = 3;
   // used to data collect by key
   repeated EntryList entry_list = 4;
 }
