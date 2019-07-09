@@ -43,7 +43,7 @@ message EntryList {
 // stat feature. support multiply days stat
 message StatFeature {
   uint64 feature_sign = 1;
-  uint64 feature_name = 2;
+  string feature_name = 2;
   int32 colid = 3;
   string raw = 4;
   string last_date = 5;   // format: yyyymmdd
