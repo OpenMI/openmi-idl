@@ -13,12 +13,14 @@ message StatMetrics {
   int32 imp = 1;
   int32 clk = 2;
   int32 ord = 3;
-  repeated double extra = 4;
+  repeated int32 values = 4;  // general stat value stored
+  repeated double extra = 5;
 }
 // stat feature basic entry
 message StatEntry {
-  int32 days =  1;
-  StatMetrics stat_metrics = 2;
+  string tag = 1;
+  int32 days =  2;
+  StatMetrics stat_metrics = 3;
 }
 
 message Entry {
