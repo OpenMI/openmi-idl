@@ -96,11 +96,9 @@ message Instance {
   Label label = 2;
   Predict predict = 3;
   repeated DiscreteFeature feature = 4;
-  repeated DiscreteFeature trans_feature = 5;
-  repeated ContinuousFeature continuous_feature = 6;
-  StatFeatureList unique_stat_feature = 7;
-  StatMetrics stat_metrics = 8;
-  map<string, string> extra = 9;
+  repeated ContinuousFeature continuous_feature = 5;
+  StatFeatureList unique_stat_feature = 6;
+  map<string, string> extra = 7;
 }
 
 /* Raw Feature */
