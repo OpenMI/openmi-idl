@@ -33,3 +33,40 @@ message RequestBatchJoinData {
   RequestBatch batch = 1;
   map<string, StatFeature> stat_feature = 2;
 }
+
+// 需要获取到：map<colid, [x_node_name, w_node_name(embedding_size), row_offset]>
+
+// for openmi-core/engine
+message ColumnKey {
+  repeated uint64 key = 1;       // feature id
+}
+
+message ColumnX {
+  repeated float x = 1;
+}
+
+// batch -> inst -> column维度
+message ColumnIndex {
+  repeated ColumnKey column_key = 1;
+  repeated ColumnX column_x = 2;
+  repeated uint32 row_offset = 3;
+}
+
+// 将ins维度展开，生成graph需要的输入tensor形式
+message ColumnFlat {
+  repeated float x = 1;
+  repeated uint32 row_offset = 2;
+}
+
+// 模型参数，按照deep／wide拆分开
+message ColumnW {
+  repeated float w = 1;
+}
+
+// the same colid but two params. such as deep_col1, wide_col1
+message BatchIndex {
+  uint32 colid = 1;
+  ColumnFlat column_flat = 2;
+  map<string, ColumnW> column_w_vars = 3;   // string: node name in graph
+}
+

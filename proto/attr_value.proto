@@ -20,5 +20,7 @@ message AttrValue {
     DataType type = 6;            // "type"
     TensorShapeProto shape = 7;   // "shape"
     TensorProto tensor = 8;       // "tensor"
+    FeatureType feature_type = 9; // SPARSE/DENSE
+    SourceNodeType source_node_type = 10;
   }
 }

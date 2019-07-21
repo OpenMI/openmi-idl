@@ -34,3 +34,18 @@ enum DataType {
 
   // TODO ...
 };
+
+// for each column
+enum FeatureType {
+  SPARSE = 0;
+  DENSE = 1;
+};
+
+enum SourceNodeType {
+  W = 0;
+  X = 1;
+  OFFSET = 2;
+  LABEL = 3;
+  OTHER = 4;
+  // ....
+};
