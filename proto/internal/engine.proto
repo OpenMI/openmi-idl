@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+option cc_enable_arenas = true;
+
+package openmi.proto.internal;
+
+// input column node name defination
+message ColumnNode {
+  int32 column_id = 1;
+  string x = 2;
+  string row_offset = 3;
+  repeated string w = 4;
+  repeated string w_grad = 5;
+}
