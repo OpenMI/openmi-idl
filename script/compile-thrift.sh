@@ -3,10 +3,10 @@
 SCRIPT_DIR=$(cd "$(dirname ${BASH_SOURCE[0]})" && pwd)
 PROJECT_DIR=$SCRIPT_DIR/..
 
-thrift_out_dir=$PROJECT_DIR/gen-thrift
+thrift_out_dir=$PROJECT_DIR/openmi
 mkdir -p $thrift_out_dir || echo "$thrift_out_dir exists!"
 
-deps_base_path=$HOME/.openmit_deps
+deps_base_path=$HOME/.openmi_deps
 
 while getopts "c:" opt; do
   case "$opt" in 

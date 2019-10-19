@@ -17,8 +17,10 @@ done
 
 # Compile IDL
 sh $SCRIPT_DIR/script/compile-proto.sh -c $deps_base_path
+sh $SCRIPT_DIR/script/compile-thrift.sh -c $deps_base_path
 
 export PROTOBUF_HOME=$deps_base_path
+export THRIFT_HOME=$deps_base_path
 
 mkdir -p $PROJECT_DIR/build || echo "$PROJECT_DIR/build exists!"
 cd $PROJECT_DIR/build

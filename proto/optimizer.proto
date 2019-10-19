@@ -1,0 +1,38 @@
+syntax="proto3";
+
+option cc_enable_arenas = true;
+option java_outer_classname = "OptimizerProtos";
+option java_multiple_files = true;
+option java_package = "org.openmi.framework";
+
+package openmi.proto;
+
+enum OptimizerType {
+  UNKNOWN_TYPE = 0;
+  SGD = 1;
+  ADAGRAD = 2;
+  ADADELTA = 3;
+  ADAM = 4;
+  SADAM = 5;
+  RMSPROP = 6;
+  MOMENTUM = 7;
+  NESTEROV_MOMENTUM = 8;
+  FTRL = 9;
+  FTML = 10;
+}
+
+message Optimizer {
+  OptimizerType type = 1;
+  string init_method = 2;
+  float init_value = 3;
+  float init_learning_rate = 4;
+  float alpha = 5;
+  float beta = 6;
+  float lambda1 = 7;
+  float lambda2 = 8;
+  float beta1 = 9;
+  float beta2 = 10;
+  float beta1_power = 11;
+  float beta2_power = 12;
+  map<string, float> extra = 13;
+}

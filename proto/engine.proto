@@ -1,0 +1,92 @@
+syntax = "proto3";
+
+option cc_enable_arenas = true;
+option java_outer_classname = "OpDefProtos";
+option java_multiple_files = true;
+option java_package = "org.openmi.engine";
+
+package openmi.proto.internal;
+
+import "optimizer.proto";
+
+// 模型权重参数定义，支持复杂的weight node定义，如wide&deep, 不同nn node使用不同的优化器等 
+
+// 不同node下的参数定义
+message WeightSchema {
+  int32 weight_offset = 1; 
+  int32 weight_size = 2;     // only model weight
+  int32 param_size = 3;      // contain middle data, such as optimizer etc.
+  Optimizer optimizer = 4;
+  int32 weight_bytes = 5;
+  int32 param_bytes = 6;
+}
+
+message ModelWeightSchema {
+  int32 column_id = 1;
+  repeated WeightSchema weight_schema = 2;
+  int32 weight_len = 3;
+  int32 weight_bytes = 4;
+  int32 param_len = 5;
+  int32 param_bytes = 6;
+}
+
+message ModelWeightSchemaMap {
+  map<int32, ModelWeightSchema> model_weight_schema = 1;
+}
+
+// A column id corresponds to multiple model weight, such as wide and deep
+// weight offset and size
+message WeightOffset {
+  int32 weight_offset = 1;
+  int32 weight_size = 2;
+}
+
+message ColumnWeightSchema {
+  int32 column_id = 1;
+  repeated WeightOffset weight_offset = 2;
+  int32 total_weight_size = 3;
+}
+
+message NNWeight {
+  int32 column_id = 1;
+  uint64 key = 2;
+  repeated float value = 3;
+}
+
+// input column nodes name defination
+message ColumnNode {
+  int32 column_id = 1;
+  string x = 2;
+  string row_offset = 3;
+  repeated string w = 4;
+  repeated string w_grad = 5;
+  ColumnWeightSchema weight_schema = 6;
+}
+
+// communication data structure between ps and worker
+message ValList {
+  repeated float val = 1;
+}
+
+enum ParamValType {
+  UNKNOWN = 0;
+  WEIGHT = 1;
+  GRADIENT = 2;
+  CHECKPOINT = 3;  // weight and model middle variable
+}
+
+message ModelParamData {
+  repeated uint64 keys = 1;
+  repeated int32 columns = 2;
+  repeated ValList vals = 3;
+  repeated uint32 lens = 4;
+  ParamValType val_type = 5;
+}
+
+message ColumnKeyIndex {
+  repeated uint64 keys = 1;
+}
+
+message ColumnKeyIndexList {
+  repeated ColumnKeyIndex key_index = 1;
+}
