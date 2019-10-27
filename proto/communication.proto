@@ -1,0 +1,35 @@
+syntax="proto3";
+
+option cc_enable_arenas = true;
+option java_outer_classname = "CommunicationDefProtos";
+option java_multiple_files = true;
+option java_package = "org.openmi.distribute_runtime";
+
+package openmi.proto.comm;
+
+// communication data structure between ps and worker
+message ValueList {
+  repeated float val = 1;
+}
+
+enum CommValueType {
+  UNKNOWN = 0;
+  WEIGHT = 1;
+  GRADIENT = 2;
+  CHECKPOINT = 3;  // it contains model weight and optimizer middle variable
+}
+
+message CommData {
+  CommValueType comm_type = 1;
+  repeated uint64 keys = 2;
+  repeated int32 fields = 3;
+  repeated ValueList vals = 4;
+  repeated uint32 lens = 5;
+}
+
+message CommMetaInfo {
+  int32 id = 1;
+  string tag = 2;
+  string content = 3;
+  map<string, string> extra = 4;
+}
