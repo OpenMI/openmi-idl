@@ -19,7 +19,7 @@ message WeightSchema {
   int32 weight_bytes = 4;           // weight_size * sizeof(value)
   int32 weight_optimizer_bytes_offset = 5;
   int32 weight_optimizer_bytes = 6;    // weight_size * size_of_optimizer
-  Optimizer optimizer = 7;
+  OptimizerConfig optimizer = 7;
 }
 
 // multiply node 

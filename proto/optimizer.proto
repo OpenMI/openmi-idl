@@ -21,7 +21,7 @@ enum OptimizerType {
   FTML = 10;
 }
 
-message Optimizer {
+message OptimizerConfig {
   OptimizerType type = 1;
   string init_method = 2;
   float init_value = 3;
